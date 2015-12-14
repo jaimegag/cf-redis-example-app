@@ -29,6 +29,11 @@ get '/' do
 end
 
 get '/redisUI' do
+  REDIS = Hash.new
+  keys = redis_client.keys('*')
+  keys.each do |key|
+    REDIS[key] = redis_client.get(key)
+  end
   erb :'redisui'
 end
 

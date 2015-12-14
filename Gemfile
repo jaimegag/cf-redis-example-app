@@ -1,7 +1,10 @@
+# set Ruby version
+ruby '2.2.3'
+
+# define our source to loook for gems
 source 'https://rubygems.org'
 
 gem 'cf-app-utils', git: 'http://github.com/cloudfoundry/cf-app-utils-ruby.git'
-
 gem 'sinatra'
 gem 'redis'
 

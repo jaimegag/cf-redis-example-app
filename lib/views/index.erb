@@ -12,8 +12,8 @@
         <p>Powered by <a href="http://www.pivotal.io">Pivotal</a>!</p>
     </div>
 
-    <a href="/killSwitch" class="btn btn-danger btn-large">Kill Switch</a>
-    <a href="/redisUI" class="btn btn-success btn-large">Access Redis</a>
+    <input onclick="killApp();" type=button class="btn btn-danger btn-large" value="Kill App">
+    <input onclick="goRedisUI();" type=button class="btn btn-success btn-large" value="Access Redis">
 
     <h2>App Instance Info: </h2>
 
@@ -31,6 +31,7 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
 

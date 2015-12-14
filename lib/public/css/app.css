@@ -1,0 +1,16 @@
+.separated {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.hiddenelement {
+	visibility: hidden;
+}
+
+.separatedinline {
+	margin-left: 10px;
+}
+
+.backblue {
+	background-color: lightblue;
+}
