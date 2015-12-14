@@ -13,8 +13,8 @@ Example:
      $ git clone git@github.com:pivotal-cf/cf-redis-example-app.git
      $ cd redis-example-app
      $ cf push redis-example-app --no-start
-     $ cf create-service p-redis dedicated-vm redisstore
-     $ cf bind-service redis-example-app redisstore
+     $ cf create-service p-redis dedicated-vm redis-instance
+     $ cf bind-service redis-example-app redis-instance
      $ cf start redis-example-app
 
 ### Endpoints

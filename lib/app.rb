@@ -4,8 +4,6 @@ require 'cf-app-utils'
 require 'json'
 require 'net/http'
 
-set :requests, 0
-
 before do
   unless redis_credentials
     halt(500, %{
@@ -13,13 +11,12 @@ You must bind a Redis service instance to this application.
 
 You can run the following commands to create an instance and bind to it:
 
-  $ cf create-service p-redis development redis-instance
+  $ cf create-service p-redis dedicated-vm redis-instance
   $ cf bind-service <app-name> redis-instance})
   end
 end
 
 get '/' do
-  settings.requests += 1
   app_info = ENV['VCAP_APPLICATION'] ? JSON.parse(ENV['VCAP_APPLICATION']) : Hash.new
   ENV['APP_NAME'] = app_info["application_name"]
   ENV['APP_INSTANCE'] = app_info["instance_index"].to_s
@@ -29,6 +26,10 @@ get '/' do
   ENV['APP_PORT'] = app_info["port"].to_s
   ENV['SERVICE_JSON'] = JSON.pretty_generate(JSON.parse(ENV['VCAP_SERVICES']))
   erb :'index'
+end
+
+get '/redisUI' do
+  erb :'redisui'
 end
 
 get '/killSwitch' do
@@ -45,16 +46,14 @@ get '/load' do
     buff.reverse!
     i += 1
   end
-  settings.requests += 1
   "<h2>I'm healthy!</h2>"
 end
 
 get '/health' do
-  settings.requests += 1
   "<h2>I'm healthy!</h2>"
 end
 
-put '/:key' do
+put '/store/:key' do
   data = params[:data]
   if data
     redis_client.set(params[:key], data)
@@ -66,7 +65,7 @@ put '/:key' do
   end
 end
 
-get '/:key' do
+get '/store/:key' do
   value = redis_client.get(params[:key])
   if value
     status 200
@@ -77,10 +76,10 @@ get '/:key' do
   end
 end
 
-get '/config/:item' do
+get '/store/config/:item' do
   unless params[:item]
     status 400
-    body 'USAGE: GET /config/:item'
+    body 'USAGE: GET /store/config/:item'
     return
   end
 
@@ -95,7 +94,7 @@ get '/config/:item' do
   body value[1]
 end
 
-delete '/:key' do
+delete '/store/:key' do
   result = redis_client.del(params[:key])
   if result > 0
     status 200
