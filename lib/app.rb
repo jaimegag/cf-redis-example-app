@@ -4,6 +4,8 @@ require 'cf-app-utils'
 require 'json'
 require 'net/http'
 
+set :requests, 0
+
 before do
   unless redis_credentials
     halt(500, %{
