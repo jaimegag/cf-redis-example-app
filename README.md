@@ -19,6 +19,10 @@ Example:
 
 ### Endpoints
 
+#### GET /
+
+Index view with App info
+
 #### GET /killSwitch
 
 Kills the application instance
