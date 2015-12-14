@@ -19,6 +19,10 @@ Example:
 
 ### Endpoints
 
+#### GET /killSwitch
+
+Kills the application instance
+
 #### PUT /:key
 
 Sets the value stored in Redis at the specified key to a value posted in the 'data' field. Example:
