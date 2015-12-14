@@ -17,42 +17,37 @@ Example:
      $ cf bind-service redis-example-app redis-instance
      $ cf start redis-example-app
 
-### Endpoints
 
-#### GET /
+### Datastore Endpoints
 
-Index view with App info
+To access the Redis datastore CRUD actions directly and not through the UI views
 
-#### GET /killSwitch
-
-Kills the application instance
-
-#### PUT /:key
+#### PUT /store/:key
 
 Sets the value stored in Redis at the specified key to a value posted in the 'data' field. Example:
 
     $ export APP=redis-example-app.my-cloud-foundry.com
-    $ curl -X PUT $APP/foo -d 'data=bar'
+    $ curl -X PUT $APP/store/foo -d 'data=bar'
     success
 
 
-#### GET /:key
+#### GET /store/:key
 
 Returns the value stored in Redis at the key specified by the path. Example:
 
-    $ curl -X GET $APP/foo
+    $ curl -X GET $APP/store/foo
     bar
 
-#### DELETE /:key
+#### DELETE /store/:key
 
 Deletes a Redis key spcified by the path. Example:
 
-    $ curl -X DELETE $APP/foo
+    $ curl -X DELETE $APP/store/foo
     success
 
-#### GET /config/:item
+#### GET /store/config/:item
 
 Returns the Redis configuration value at the key specified by the path. Example:
 
-    $ curl -X GET $APP/config/max_clients
+    $ curl -X GET $APP/store/config/max_clients
     100
