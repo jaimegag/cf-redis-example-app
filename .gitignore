@@ -1,3 +1,5 @@
 .rspec
 dump.rdb
 redis.log
+vendor/
+.bundle/
