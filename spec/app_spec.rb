@@ -130,7 +130,7 @@ describe 'app' do
         end
 
         it 'returns the config value' do
-          get '/config/maxclients'
+          get '/store/config/maxclients'
           expect(last_response.body).to match /^\d+$/
         end
       end
