@@ -15,7 +15,7 @@ describe 'app' do
     ENV.store("VCAP_SERVICES", vcap_services)
   end
 
-  let(:path) { "/#{key}" }
+  let(:path) { "/store/#{key}" }
   let(:key) { 'foo' }
 
   context 'when there is no redis instance bound' do
@@ -57,7 +57,7 @@ describe 'app' do
       }.to_json
     end
 
-    describe 'PUT /:key' do
+    describe 'PUT /store/:key' do
       context 'with data' do
         let(:payload) { { data: 'bar' } }
 
@@ -87,7 +87,7 @@ describe 'app' do
       end
     end
 
-    describe 'GET /:key' do
+    describe 'GET /store/:key' do
       context 'when the key does not exist' do
         let(:key) { 'nonexistant' }
 
@@ -122,10 +122,10 @@ describe 'app' do
       end
     end
 
-    describe 'GET /config/:item' do
+    describe 'GET /store/config/:item' do
       context 'when the configuration item exists' do
         it 'returns 200' do
-          get '/config/maxclients'
+          get '/store/config/maxclients'
           expect(last_response.status).to eq 200
         end
 
@@ -137,13 +137,13 @@ describe 'app' do
 
       context 'when the configuration item does not exist' do
         it 'returns 404' do
-          get '/config/treeplatypus'
+          get '/store/config/treeplatypus'
           expect(last_response.status).to eq 404
         end
       end
     end
 
-    describe 'DELETE /:key' do
+    describe 'DELETE /store/:key' do
       context 'when the key does not exist' do
         let(:key) { 'nonexistant' }
 
