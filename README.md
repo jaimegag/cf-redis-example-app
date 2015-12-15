@@ -44,10 +44,3 @@ Deletes a Redis key spcified by the path. Example:
 
     $ curl -X DELETE $APP/store/foo
     success
-
-#### GET /store/config/:item
-
-Returns the Redis configuration value at the key specified by the path. Example:
-
-    $ curl -X GET $APP/store/config/max_clients
-    100

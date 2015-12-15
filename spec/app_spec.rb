@@ -122,27 +122,6 @@ describe 'app' do
       end
     end
 
-    describe 'GET /store/config/:item' do
-      context 'when the configuration item exists' do
-        it 'returns 200' do
-          get '/store/config/maxclients'
-          expect(last_response.status).to eq 200
-        end
-
-        it 'returns the config value' do
-          get '/store/config/maxclients'
-          expect(last_response.body).to match /^\d+$/
-        end
-      end
-
-      context 'when the configuration item does not exist' do
-        it 'returns 404' do
-          get '/store/config/treeplatypus'
-          expect(last_response.status).to eq 404
-        end
-      end
-    end
-
     describe 'DELETE /store/:key' do
       context 'when the key does not exist' do
         let(:key) { 'nonexistant' }

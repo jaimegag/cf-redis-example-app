@@ -79,24 +79,6 @@ get '/store/:key' do
   end
 end
 
-get '/store/config/:item' do
-  unless params[:item]
-    status 400
-    body 'USAGE: GET /store/config/:item'
-    return
-  end
-
-  value = redis_client.config('get', params[:item])
-  if value.length < 2
-    status 404
-    body "config item #{params[:item]} not found"
-    return
-  end
-
-  status 200
-  body value[1]
-end
-
 delete '/store/:key' do
   result = redis_client.del(params[:key])
   if result > 0
