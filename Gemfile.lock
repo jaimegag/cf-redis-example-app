@@ -1,12 +1,7 @@
-GIT
-  remote: http://github.com/cloudfoundry/cf-app-utils-ruby.git
-  revision: bbad1b0df516cb26ff3399495db92ee9cbdb4b8b
-  specs:
-    cf-app-utils (0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
+    cf-app-utils (0.6)
     childprocess (0.5.8)
       ffi (~> 1.0, >= 1.0.11)
     diff-lcs (1.2.5)
@@ -40,7 +35,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cf-app-utils!
+  cf-app-utils
   childprocess
   rack-test
   redis
@@ -48,4 +43,4 @@ DEPENDENCIES
   sinatra
 
 BUNDLED WITH
-   1.11.0
+   1.11.1
