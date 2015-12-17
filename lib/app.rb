@@ -39,23 +39,6 @@ get '/killSwitch' do
   Kernel.exit!
 end
 
-get '/load' do
-   i = 0
-   myStr = "Kill the CPU!!!"
-   buff = ""
-
-  while i < 50000  do
-    buff += myStr.to_s
-    buff.reverse!
-    i += 1
-  end
-  "<h2>I'm healthy!</h2>"
-end
-
-get '/health' do
-  "<h2>I'm healthy!</h2>"
-end
-
 put '/store/:key' do
   data = params[:data]
   if data
