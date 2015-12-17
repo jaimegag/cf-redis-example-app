@@ -5,7 +5,7 @@ This Ruby based app is an example of how you can consume a Cloud Foundry service
 It contains a WEB UI to visualize App properties and the service configuration read from the environment.
 The UI also allows you to add new Redis key/value pairs and visualize all existing key/value pairs
 
-Additionally you can set, get and delete Redis key/value pairs using RESTful endpoints.
+Additionally you can also set, get and delete Redis key/value pairs using RESTful endpoints.
 
 ### Getting Started
 
