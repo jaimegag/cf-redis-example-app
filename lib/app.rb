@@ -9,7 +9,7 @@ before do
     halt(500, %{
   You must bind a Redis service instance to this application.
   You can run the following commands to create an instance and bind to it:
-  $ cf create-service p-redis dedicated-vm redis-instance
+  $ cf create-service rediscloud 30mb redis-instance
   $ cf bind-service <app-name> redis-instance})
   end
 end
@@ -22,6 +22,7 @@ get '/' do
   ENV['APP_DISK'] = app_info["limits"] ? app_info["limits"]["disk"].to_s : " "
   ENV['APP_IP'] = IPSocket.getaddress(Socket.gethostname)
   ENV['APP_PORT'] = app_info["port"].to_s
+  ENV['REDIS_CREDENTIALS'] = redis_credentials.to_s
   ENV['SERVICE_JSON'] = JSON.pretty_generate(JSON.parse(ENV['VCAP_SERVICES']))
   erb :'index'
 end
@@ -75,14 +76,14 @@ end
 
 def redis_credentials
   if ENV['VCAP_SERVICES']
-    all_pivotal_redis_credentials = CF::App::Credentials.find_all_by_all_service_tags(['redis', 'pivotal'])
-    all_pivotal_redis_credentials && all_pivotal_redis_credentials.first
+    all_pivotal_redis_credentials = CF::App::Credentials.find_by_service_name('redis-instance')
+    all_pivotal_redis_credentials
   end
 end
 
 def redis_client
   @client ||= Redis.new(
-    host: redis_credentials.fetch('host'),
+    host: redis_credentials.fetch('hostname'),
     port: redis_credentials.fetch('port'),
     password: redis_credentials.fetch('password')
   )
