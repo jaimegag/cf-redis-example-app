@@ -83,7 +83,7 @@ end
 
 def redis_client
   @client ||= Redis.new(
-    host: redis_credentials.fetch('hostname'),
+    host: redis_credentials.fetch('host'),
     port: redis_credentials.fetch('port'),
     password: redis_credentials.fetch('password')
   )
